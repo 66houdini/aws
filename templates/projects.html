@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <title>Projects - Manga/Manhwa to Video</title>
+<!--    <link rel="stylesheet" href="{{ url_for('static', filename='css/project.css') }}">-->
+</head>
+<body>
+   <header class="flex justify-between px-10 py-5 bg-black text-white">
+        <div class="logo text-2xl ">
+            <a href="/"> Manga/Manhwa to Video</a>
+           </div>
+        <nav>
+            <ul class="flex space-x-5">
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('create_project') }}">Create Project</a></li>
+                <li><a href="{{ url_for('batch_create') }}">Batch Create</a></li>
+                <li><a href="{{ url_for('projects') }}">Projects</a></li>
+                <li><a href="{{ url_for('app_config') }}">App Config</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="p-24 space-y-5">
+        <h1 class="text-3xl font-bold">Projects</h1>
+        <a href="{{ url_for('create_project') }}" class="px-4 py-2 bg-blue-600 rounded-md cursor-pointer">Create New Project</a>
+
+        <section class="project-list">
+            <div class="flex justify-between mt-8">
+                 <h1 class="font-bold ">Project Name</h1>
+            <h1 class="font-bold">Actions</h1>
+            </div>
+
+            {% if projects %}
+                <ul class="space-y-2">
+                    {% for project in projects %}
+                        <li class="bg-zinc-100 p-2 flex justify-between">
+                            <h1 class="self-center">{{ project.name }} ({{ project.type }})</h1>
+                            <a href="{{ url_for('project', project_id=project.id) }}" class=" py-2 px-4 bg-blue-600 rounded-md">
+                                view
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No projects found.</p>
+            {% endif %}
+        </section>
+    </main>
+</body>
+</html>
